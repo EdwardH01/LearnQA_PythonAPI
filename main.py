@@ -1,4 +1,5 @@
 import requests
 
-response = requests.get("https://playground.learnqa.ru/api/hello")
+payload = {"name": "User_1"}
+response = requests.get("https://playground.learnqa.ru/api/hello", params=payload)
 print(response.text)
