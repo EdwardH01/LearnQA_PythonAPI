@@ -1,11 +1,11 @@
 from json.decoder import JSONDecodeError
 import requests
 
-responce = requests.get("https://playground.learnqa.ru/api/get_text")
-print(responce.text)
+response = requests.get("https://playground.learnqa.ru/api/get_text")
+print(response.text)
 
 try:
-    parsed_responce_text = responce.json()
-    print(parsed_responce_text)
+    parsed_response_text = response.json()
+    print(parsed_response_text)
 except JSONDecodeError:
-    print("Responce is not a JSON format")
+    print("Response is not a JSON format")
