@@ -91,3 +91,17 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    def prepare_registration_data_ex16(self, email = None):    # Метод подготовки регистрационных данных юзера
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'username': 'learnqa',
+            'password': '0000',
+            'firstName': 'learnqa',
+            'lastName': 'learnqa',
+            'email': email
+        }
