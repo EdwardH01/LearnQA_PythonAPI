@@ -41,6 +41,16 @@ class Assertions:
         assert name not in response_as_dict, f"Response JSON shouldn't have key '{name}'"
 
     @staticmethod
+    def assert_json_has_not_keys(response: Response, names: list):
+        try:
+            response_as_dict = response.json()
+        except json.JSONDecodeError:
+            assert False, f"Response is not in JSON format. Response text is '{response.text}'. But it's present"
+        for name in names:
+            assert name not in response_as_dict, f"Assertions - assert_json_has_not_keys. Response JSON unexpectedly have key '{name}'"
+
+
+    @staticmethod
     def assert_code_status(response: Response, expected_status_code):   # Метод проверки соответствия статус-кода ожидаемому
         assert response.status_code == expected_status_code, \
             f"Unexpected status code! Expected: {expected_status_code}. Actual: {response.status_code}"
@@ -62,3 +72,10 @@ class Assertions:
     def assert_too_long_name(response: Response, expected_response_text):
         assert response.text == expected_response_text, \
             f"Unexpected success registration with too long username! Expected response: {expected_response_text}. Actual: {response.text}"
+
+# Ex17-4:
+    @staticmethod
+    def assert_short_firstname(response: Response, expected_response_text):
+        assert response.text == expected_response_text, \
+            f"Unexpected success editing with too short username! Expected response: {expected_response_text}. Actual: {response.text}"
+

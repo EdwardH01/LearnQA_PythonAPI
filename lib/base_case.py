@@ -105,3 +105,17 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    def prepare_registration_data_with_short_firstname(self, email = None):    # Регистрационные данные юзера с именем в 1 символ
+        if email is None:
+            base_part = "learnqa"
+            domain = "example.com"
+            random_part = datetime.now().strftime("%m%d%Y%H%M%S")
+            email = f"{base_part}{random_part}@{domain}"
+        return {
+            'username': 'learnqa',
+            'password': '123',
+            'firstName': 'q',
+            'lastName': 'learnqa',
+            'email': email
+        }
