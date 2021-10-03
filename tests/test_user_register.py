@@ -11,21 +11,21 @@ import allure
 class TestUserRegister(BaseCase):       # Новый класс - наследник класса BaseCase
 
     @allure.description("This test checks successfully registration user with unique email")
+    @allure.severity(allure.severity_level.BLOCKER)
     def test_create_user_successfully(self):
         data = self.prepare_registration_data()
 
-# old        response = requests.post("https://playground.learnqa.ru/api/user/", data = data)
         response = MyRequests.post("/user/", data=data)
 
         Assertions.assert_code_status(response, 200)
         Assertions.assert_json_has_key(response, "id")
 
     @allure.description("This test checks registering user with already existing email")
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_create_user_with_existing_email(self):
         email = 'vinkotov@example.com'
         data = self.prepare_registration_data(email)
 
-# old        response = requests.post("https://playground.learnqa.ru/api/user/", data = data)
         response = MyRequests.post("/user/", data=data)
 
         Assertions.assert_code_status(response, 400)
@@ -34,6 +34,7 @@ class TestUserRegister(BaseCase):       # Новый класс - наследн
 
 # Ex15-1:
     @allure.description("This test checks registering user with email w/o @")
+    @allure.severity(allure.severity_level.MINOR)
     def test_create_user_with_email_without_at(self):
         data = self.prepare_registration_data_without_at()
 
@@ -88,6 +89,7 @@ class TestUserRegister(BaseCase):       # Новый класс - наследн
     ]
     @allure.description("This test checks that a user cannot register without any of the required fields")
     @pytest.mark.parametrize('payload', payload)
+    @allure.severity(allure.severity_level.NORMAL)
     def test_create_user_without_one_of_required_fields(self, payload):
 
         response = MyRequests.post("/user/", data=payload)
@@ -100,6 +102,7 @@ class TestUserRegister(BaseCase):       # Новый класс - наследн
 
 # Ex15-3:
     @allure.description("This test checks registering user with 1 character name")
+    @allure.severity(allure.severity_level.MINOR)
     def test_create_user_with_short_name(self):
         data = self.prepare_registration_data_with_short_name()
 
@@ -109,6 +112,7 @@ class TestUserRegister(BaseCase):       # Новый класс - наследн
 
 # Ex15-4:
     @allure.description("This test checks registering user with > 250 characters name")
+    @allure.severity(allure.severity_level.TRIVIAL)
     def test_create_user_with_too_long_name(self):
         data = self.prepare_registration_data_with_too_long_name()
 
